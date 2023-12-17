@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - ST Dub Team</title>
+    <link rel="shortcut icon" href="/static/images/logo.png" type="image/png">
+    <link rel="stylesheet" href="/static/script_style.css">
+    <meta property="og:title" content="<%= title %> - ST Dub Team" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= header_url %>" />
+    <meta property="og:site_name" content="ST Dub Team" />
+    <meta property="og:image" content="<%= thumnail_url %>" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="บทพากย์ - ST Dub Team" />
+    <meta name="twitter:url" content="<%= header_url %>" />
+    <meta name="twitter:image" content="<%= thumnail_url %>" />
+</head>
+
+<body>
+    <h1 class="title"><%= title %></h1>
+    <% message.forEach(function(in_message) { %>
+        <div class="dialog_message">
+            <img class="dialog_message_img" src="<%= in_message.char_img %>"></img>
+            <div class="dialog_message_box">
+                <h1 class="dialog_message_box_head"><%= in_message.char_name %></h1>
+                <p class="dialog_message_box_message"><%= in_message.message %></p>
+            </div>
+        </div>
+    <% }); %>
+    <a class="back_to_home_button" href="/home"><p class="back_to_home_text">กลับสู่หน้าหลัก</p></a>
+</body>
+
+</html>

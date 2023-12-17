@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บทพากย์ - ST Dub Team</title>
+    <link rel="shortcut icon" href="/static/images/logo.png" type="image/png">
+    <link rel="stylesheet" href="/static/home_style.css">
+    <meta property="og:title" content="บทพากย์ - ST Dub Team" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= header_url %>" />
+    <meta property="og:site_name" content="ST Dub Team" />
+    <meta property="og:image" content="<%= thumnail_url %>" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="บทพากย์ - ST Dub Team" />
+    <meta name="twitter:url" content="<%= header_url %>" />
+    <meta name="twitter:image" content="<%= thumnail_url %>" />
+</head>
+<body>
+    <div class="header">
+        <img class="img_header" src="/static/images/logo.png">
+        <h1 class="text_header">บทพากย์ ST Dub Team</h1>
+    </div>
+    <div class="header_space"></div>
+    <% listscript.forEach(function(script) { %>
+            <a class="list" href="<%= script.link %>">
+                <div class="list_script">
+                    <img class="list_script_thumnail" src="<%= script.thumnail %>"></img>
+                    <h1 class="list_script_title"><%= script.title %></h1>
+                </div>
+            </a>
+    <% }); %>
+</body>
+</html>
