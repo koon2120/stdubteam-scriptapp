@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สร้างบทพากย์ใหม่ - ST Dub Team</title>
+    <link rel="shortcut icon" href="https://i.ibb.co/nnJTt0v/logo.png" type="image/png">
+    <meta property="og:title" content="สร้างบทพากย์ใหม่ - ST Dub Team" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= header_url %>" />
+    <meta property="og:site_name" content="ST Dub Team" />
+    <meta property="og:image" content="<%= thumnail_url %>" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="สร้างบทพากย์ใหม่ - ST Dub Team" />
+    <meta name="twitter:url" content="<%= header_url %>" />
+    <meta name="twitter:image" content="<%= thumnail_url %>" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap');
+
+        body {
+            background-color: #111111;
+            font-family: 'Sarabun', sans-serif;
+        }
+
+        .title {
+            font-weight: 700;
+            font-size: 30px;
+            color: #f3f3f3;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .dialog_message {
+            background-color: #2e2e2e;
+            border-radius: 15px;
+            border-style: solid;
+            border-color: #4b4b4b;
+            border-width: 1px;
+            margin-left: 30px;
+            margin-right: 30px;
+            padding: 5px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            transition: 0.1s;
+        }
+
+        .dialog_message:hover {
+            border-color: #696969;
+            background-color: #3d3d3d;
+        }
+
+        .dialog_message_img {
+            width: 60px;
+            height: 60px;
+            background-color: #838383;
+            border-radius: 50%;
+            float: left;
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+
+        .dialog_message_box {
+            display: inline-block;
+            margin-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .dialog_message_box_head {
+            color: #f3f3f3;
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .dialog_message_box_message {
+            color: #dddddd;
+            font-size: 18px;
+            font-weight: 400;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .dialog_message:hover .edit_info {
+            opacity: 100%;
+        }
+
+        .edit_info {
+            font-size: 8px;
+            text-align: center;
+            color: #eeeeee;
+            opacity: 0%;
+            transition: 0.1s;
+        }
+
+        .input_message_input_info {
+            font-size: 12px;
+            color: #ff5555;
+            margin-left: 6px;
+            margin-bottom: 10px;
+        }
+
+        .input_message {
+            background-color: #2e2e2e;
+            border-radius: 15px;
+            border-style: solid;
+            border-color: #4b4b4b;
+            border-width: 1px;
+            margin-left: 30px;
+            margin-right: 30px;
+            padding: 5px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            padding: 20px;
+        }
+
+        .input_message_box {
+            margin-top: 3px;
+            margin-bottom: 3px;
+        }
+
+        .input_message_input_text {
+            color: #dddddd;
+            font-size: 17px;
+            font-weight: 400;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .input_message_input {
+            background-color: #202020;
+            border-color: #444444;
+            color: #e6e6e6;
+            font-size: 13px;
+            font-family: 'Sarabun', sans-serif;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 7px;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            width: 30%;
+        }
+
+        .input_message_input:focus {
+            outline: none;
+        }
+
+        .add_button {
+            font-weight: 400;
+            font-size: 14px;
+            font-family: 'Sarabun', sans-serif;
+            color: #ececec;
+            border-style: solid;
+            border-color: #616161;
+            border-width: 1px;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #292929;
+            padding-left: 14px;
+            padding-right: 14px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            border-radius: 10px;
+            margin-left: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .edit_button {
+            font-weight: 400;
+            font-size: 14px;
+            font-family: 'Sarabun', sans-serif;
+            color: #ece6ab;
+            border-style: solid;
+            border-color: #5f5b28;
+            border-width: 1px;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #2b2a1a;
+            padding-left: 14px;
+            padding-right: 14px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            border-radius: 10px;
+            margin-left: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .delete_button {
+            font-weight: 400;
+            font-size: 14px;
+            font-family: 'Sarabun', sans-serif;
+            color: #ebc0c0;
+            border-style: solid;
+            border-color: #723030;
+            border-width: 1px;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #2b1b1b;
+            padding-left: 14px;
+            padding-right: 14px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            border-radius: 10px;
+            margin-left: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .add_button:hover {
+            background-color: #4e4e4e;
+            border-color: #7a7a7a;
+        }
+
+        .edit_button:hover {
+            background-color: #53580c;
+            border-color: #cccf1d;
+        }
+
+        .delete_button:hover {
+            background-color: #490909;
+            border-color: #d61111;
+        }
+
+        .back_to_home_button {
+            text-decoration: none;
+        }
+
+        .back_to_home_text {
+            font-weight: 400;
+            font-size: 11px;
+            color: #ececec;
+            border-style: solid;
+            border-color: #585858;
+            border-width: 1px;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #2e2e2e;
+            padding-left: 8px;
+            padding-right: 8px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            display: inline-block;
+            border-radius: 10px;
+            margin-left: 10px;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+
+        .back_to_home_text:hover {
+            background-color: #4e4e4e;
+            border-color: #7a7a7a;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .title {
+                font-weight: 700;
+                font-size: 18px;
+                color: #f3f3f3;
+                text-align: center;
+                margin-top: 20px;
+                margin-bottom: 30px;
+            }
+
+            .dialog_message {
+                background-color: #2e2e2e;
+                border-radius: 15px;
+                border-style: solid;
+                border-color: #4b4b4b;
+                border-width: 1px;
+                margin-left: 10px;
+                margin-right: 10px;
+                padding: 5px;
+                margin-top: 15px;
+                margin-bottom: 15px;
+            }
+
+            .dialog_message_img {
+                width: 50px;
+                height: 50px;
+                background-color: #838383;
+                border-radius: 50%;
+                float: left;
+                margin-top: 10px;
+                margin-left: 20px;
+            }
+
+            .dialog_message_box {
+                display: inline-block;
+                margin-left: 20px;
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
+
+            .dialog_message_box_head {
+                color: #f3f3f3;
+                font-size: 14px;
+                font-weight: 700;
+                margin-top: 0;
+                margin-bottom: 5px;
+            }
+
+            .dialog_message_box_message {
+                color: #dddddd;
+                font-size: 12px;
+                font-weight: 400;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+
+            .back_to_home_text {
+                font-weight: 400;
+                font-size: 9px;
+                color: #ececec;
+                border-style: solid;
+                border-color: #585858;
+                border-width: 1px;
+                text-align: center;
+                margin-top: 50px;
+                background-color: #2e2e2e;
+                padding-left: 6px;
+                padding-right: 6px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                display: inline-block;
+                border-radius: 10px;
+                margin-left: 5px;
+                margin-top: 5px;
+                transition: 0.2s;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">สร้างบทพากย์ใหม่</h1>
+    <div class="input_message">
+        <p class="input_message_input_info">*นำ Link ไฟล์ของรูปภาพที่ต้องการ ขนาดแนะนำ 1280x720px
+            (สามารถอัปโหลดรูปได้จากเว็บอัปโหลดรูปภาพทั่วไปได้เลย เช่น imgbb.com) <br>*ตัวอย่าง link รูปภาพ :
+            https://i.ibb.co/Gc6Kjdf/image.png</p>
+        <div class="input_message_box">
+            <label class="input_message_input_text" for="pj_name">ชื่อบทพากย์ : </label>
+            <input class="input_message_input" type="text" name="pj_name" id="pj_name"><br>
+        </div>
+        <div class="input_message_box">
+            <label class="input_message_input_text" for="pj_thumnail">Link หน้าปก (ไม่จำเป็น) : </label>
+            <input class="input_message_input" type="text" name="pj_thumnail" id="pj_thumnail"><br>
+        </div>
+        <button class="add_button" onclick="create_pj()">สร้างไฟล์</a>
+    </div>
+    <div id="content"></div>
+    <div class="input_message">
+        <p class="input_message_input_info">*นำ Link ไฟล์ของรูปภาพที่ต้องการ ขนาดใดก็ได้ และสัดส่วนจะต้องเป็น 1:1
+            เท่านั้น (สามารถอัปโหลดรูปได้จากเว็บอัปโหลดรูปภาพทั่วไปได้เลย เช่น imgbb.com) <br>*ตัวอย่าง link รูปภาพ :
+            https://i.ibb.co/Gc6Kjdf/image.png</p>
+        <div class="input_message_box">
+            <label class="input_message_input_text" for="char_image">Link รูปภาพ : </label>
+            <input class="input_message_input" type="text" name="char_image" id="char_image"><br>
+        </div>
+        <div class="input_message_box">
+            <label class="input_message_input_text" for="char_name">ชื่อตัวละคร : </label>
+            <input class="input_message_input" type="text" name="char_name" id="char_name"><br>
+        </div>
+        <div class="input_message_box">
+            <label class="input_message_input_text" for="char_message">ข้อความ : </label>
+            <input class="input_message_input" type="text" name="char_message" id="char_message"><br>
+        </div>
+        <button class="add_button" onclick="create_script()">เพิ่ม</a>
+    </div>
+    <a class="back_to_home_button" href="/">
+        <p class="back_to_home_text">กลับสู่หน้าหลัก</p>
+    </a>
+    <script>
+        let char_script = []
+
+        function create_script() {
+            char_script_id_to_text = "content_" + String(char_script.length + 1)
+            let char_image = document.getElementById('char_image').value
+            let char_name = document.getElementById('char_name').value
+            let char_message = document.getElementById('char_message').value
+            if (char_image && char_name && char_message) {
+                char_script.push({ "char_img": char_image, "char_name": char_name, "message": char_message })
+                document.getElementById('content').innerHTML += `<div id="${char_script_id_to_text}" class="dialog_message" onclick="edit_script_show('${char_script_id_to_text}')">
+        <img class="dialog_message_img" src="${char_image}"></img>
+        <div class="dialog_message_box">
+            <h1 class="dialog_message_box_head">${char_name}</h1>
+            <p class="dialog_message_box_message">${char_message}</p>
+        </div>
+        <p class="edit_info">คลิกเพื่อแก้ไข</p>
+    </div>`
+            } else {
+                alert("ไม่สามารถเพิ่มได้ เนื่องจากข้อมูลไม่เพียงพอ")
+            }
+            document.getElementById('char_image').value = ""
+            document.getElementById('char_name').value = ""
+            document.getElementById('char_message').value = ""
+        }
+
+        function edit_script_show(content_id) {
+            let cir = Number(content_id.slice(8))
+            for (let num = 1; num < char_script.length + 1; num++) {
+                if (num != cir) {
+                    document.getElementById('content_' + String(num)).outerHTML = `<div id="${'content_' + String(num)}" class="dialog_message" onclick="edit_script_show('${'content_' + String(num)}')">
+            <img class="dialog_message_img" src="${char_script[num - 1]["char_img"]}"></img>
+            <div class="dialog_message_box">
+                <h1 class="dialog_message_box_head">${char_script[num - 1]["char_name"]}</h1>
+                <p class="dialog_message_box_message">${char_script[num - 1]["message"]}</p>
+            </div>
+            <p class="edit_info">คลิกเพื่อแก้ไข</p>
+        </div>`
+                }
+            }
+            let char_image_edit = char_script[cir - 1]["char_img"]
+            let char_name_edit = char_script[cir - 1]["char_name"]
+            let char_message_edit = char_script[cir - 1]["message"]
+            document.getElementById(content_id).outerHTML = `<div id="${content_id}" class="input_message">
+    <div class="input_message_box">
+        <label class="input_message_input_text" for="char_image_edit">Link รูปภาพ : </label>
+        <input class="input_message_input" type="text" name="char_image_edit" id="char_image_edit" value="${char_image_edit}"><br>
+    </div>
+    <div class="input_message_box">
+        <label class="input_message_input_text" for="char_name_edit">ชื่อตัวละคร : </label>
+        <input class="input_message_input" type="text" name="char_name_edit" id="char_name_edit" value="${char_name_edit}"><br>
+    </div>
+    <div class="input_message_box">
+        <label class="input_message_input_text" for="char_message_edit">ข้อความ : </label>
+        <input class="input_message_input" type="text" name="char_message_edit" id="char_message_edit" value="${char_message_edit}"><br>
+    </div>
+    <button class="edit_button" onclick="edit_script_edit('${content_id}')">แก้ไข</a>
+    <button class="delete_button" onclick="delete_script_delete('${content_id}')">ลบ</a>
+</div>`
+        }
+
+        function edit_script_edit(content_id) {
+            let cir = Number(content_id.slice(8))
+            let char_image_edit_set = document.getElementById('char_image_edit').value
+            let char_name_edit_set = document.getElementById('char_name_edit').value
+            let char_message_edit_set = document.getElementById('char_message_edit').value
+            if (char_image_edit_set && char_name_edit_set && char_message_edit_set) {
+                char_script[cir - 1] = { "char_img": char_image_edit_set, "char_name": char_name_edit_set, "message": char_message_edit_set }
+                document.getElementById(content_id).outerHTML = `<div id="${content_id}" class="dialog_message" onclick="edit_script_show('${content_id}')">
+        <img class="dialog_message_img" src="${char_image_edit_set}"></img>
+        <div class="dialog_message_box">
+            <h1 class="dialog_message_box_head">${char_name_edit_set}</h1>
+            <p class="dialog_message_box_message">${char_message_edit_set}</p>
+        </div>
+        <p class="edit_info">คลิกเพื่อแก้ไข</p>
+    </div>`
+            } else {
+                alert("ไม่สามารถเพิ่มได้ เนื่องจากข้อมูลไม่เพียงพอ")
+            }
+        }
+
+        function delete_script_delete(content_id) {
+            let cir = Number(content_id.slice(8))
+            char_script.splice(cir - 1, 1)
+            document.getElementById('content').innerHTML = ""
+            for (let num = 1; num < char_script.length + 1; num++) {
+                document.getElementById('content').innerHTML += `<div id="${'content_' + String(num)}" class="dialog_message" onclick="edit_script_show('${'content_' + String(num)}')">
+            <img class="dialog_message_img" src="${char_script[num - 1]["char_img"]}"></img>
+            <div class="dialog_message_box">
+                <h1 class="dialog_message_box_head">${char_script[num - 1]["char_name"]}</h1>
+                <p class="dialog_message_box_message">${char_script[num - 1]["message"]}</p>
+            </div>
+            <p class="edit_info">คลิกเพื่อแก้ไข</p>
+        </div>`
+            }
+        }
+
+        function create_pj() {
+            if (char_script.length != 0 && pj_name) {
+                let pj_name = document.getElementById("pj_name").value
+                let pj_thumnail = document.getElementById("pj_thumnail").value
+                let jsonData = [{ "title": pj_name, "thumnail": pj_thumnail }, char_script]
+                const a = document.createElement("a");
+                const file = new Blob([JSON.stringify(jsonData)], { type: "text/plain" });
+                a.href = URL.createObjectURL(file)
+                a.download = "stdubteam_script.json"
+                a.click()
+
+            } else {
+                alert("คุณจะต้องเพิ่มบทพากย์และตั้งชื่อบทพากย์ก่อน")
+            }
+        }
+    </script>
+</body>
+
+</html>
