@@ -28,7 +28,6 @@ app.get('/id/:id', (req, res) => {
         let json_data = await response.json()
         res.render('script', {
             "title": json_data[0]["title"],
-            "message": json_data[1],
             "header_url": req.protocol + "://" + req.hostname + req.originalUrl,
             "thumnail": json_data[0]["thumnail"]
         })

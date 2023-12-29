@@ -209,26 +209,34 @@
 
 <body>
 
-    <h1 class="title"><img class="header_img" src="<%= thumnail %>"><br>
+    <h1 id="thumnail" class="title"><img class="header_img" src="<%= thumnail %>"><br>
         <%= title %>
     </h1>
     <hr>
-    <% message.forEach(function(in_message) { %>
-        <div class="dialog_message">
-            <img class="dialog_message_img" src="<%= in_message.char_img %>"></img>
-            <div class="dialog_message_box">
-                <h1 class="dialog_message_box_head">
-                    <%= in_message.char_name %>
-                </h1>
-                <p class="dialog_message_box_message">
-                    <%= in_message.message %>
-                </p>
-            </div>
+    <div id="script_zone"></div>
+    <a class="back_to_home_button" href="/">
+        <p class="back_to_home_text">กลับสู่หน้าหลัก</p>
+    </a>
+    <script>
+        async function get_script() {
+            let response = await fetch(location.protocol + "//" + location.hostname + `/api/char_scripts/${location.pathname.slice(4, 9)}.json`)
+            let script = await response.json()
+            for (let i = 0;i<script[1].length;i++) {
+                document.getElementById("script_zone").innerHTML += `<div class="dialog_message">
+        <img class="dialog_message_img" src="${script[1][i]["char_img"]}"></img>
+        <div class="dialog_message_box">
+            <h1 class="dialog_message_box_head">
+                ${script[1][i]["char_name"]}
+            </h1>
+            <p class="dialog_message_box_message">
+                ${script[1][i]["message"]}
+            </p>
         </div>
-        <% }); %>
-            <a class="back_to_home_button" href="/">
-                <p class="back_to_home_text">กลับสู่หน้าหลัก</p>
-            </a>
+    </div>`
+            }
+        }
+        get_script()
+    </script>
 </body>
 
 </html>

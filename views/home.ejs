@@ -154,7 +154,6 @@
     </a>
     <script>
         async function get_script_list() {
-            console.log(location.protocol)
             let response = await fetch(location.protocol + "//" + location.hostname + '/api/scripts_list.json')
             let scripts_list = await response.json()
             for (let i = 0; i < scripts_list.length; i++) {
